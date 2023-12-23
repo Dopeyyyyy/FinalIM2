@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN+hK0z2L10P4Q7FqMl3UJq1aVC6LrT2" crossorigin="anonymous">
+    <title>User Profile</title>
+    <style>  
+    body {
+        padding-top: 60px;
+        background: #FAD247;
+        background-size: cover;
+        color: #fff;
+        height: 100vh;
+        margin: 0;
+    }
+        body {
+            padding-top: 60px;
+            font-family: Arial, sans-serif;
+            background: #FAD247;
+        }
+
+        .container-profile {
+            text-align: center;
+            margin-top: 50px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .profile-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+
+        .profile-details {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        .profile-details li {
+            margin-bottom: 15px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 15px;
+        }
+
+        .profile-details strong {
+            display: inline-block;
+            width: 150px;
+            text-align: left;
+            margin-bottom: 5px;
+            color: #555;
+            font-weight: bold;
+        }
+
+        .profile-details span {
+            color: #e60c0c;
+            margin-right: 30px;
+            display: inline-block;
+            text-align: right;
+        }
+
+        .btn-edit-profile {
+            margin-top: 20px;
+        }
+        .usersa{
+            color: #343a40;
+        }
+        .navbar {
+            background-color: #343a40;
+        }
+
+        .navbar-dark .navbar-nav .nav-link {
+            color: #ffffff;
+        }
+
+        .navbar-dark .navbar-nav .nav-link:hover {
+            color: #ffffff;
+        }
+        .names{
+            color: black;
+            font-style: oblique;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding-top: 56px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="collapse navbar-collapse" id="navbar">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('index') }}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/add_email">Add Email</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/add_note">Add Notes</a>
+                </li>
+                <!-- New Profile Button -->
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('edit_profile') }}">
+                        <i class="fa fa-edit"></i> Edit Profile
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container-profile">
+        <i class="fa fa-user profile-icon"></i>
+        <h1 class="usersa" style="text-align: center; color:#E21B70">User Profile</h1>
+        <div class="names"><p>{{ user_data[0] }}</p></div>
+        
+        
+        <div class="container">
+            
+            <ul class="profile-details">
+                
+                {% for profile in user_profiles %}
+                
+                    <li>
+                        <strong>First Name:</strong>
+                        <span>{{ profile[2] }}</span><br>
+                        <strong>Middle Name:</strong>
+                        <span>{{ profile[3] }}</span><br>
+                        <strong>Last Name:</strong>
+                        <span>{{ profile[4] }}</span><br>
+                        <strong>Bio:</strong>
+                        <span>{{ profile[5] }}</span><br>
+                        <strong>Birthdate:</strong>
+                        <span>{{ profile[6] }}</span><br>
+                        <strong>Gender:</strong>
+                        <span>{{ profile[7] }}</span><br>
+                        <strong>Location:</strong>
+                        <span>{{ profile[8] }}</span><br>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <a style="background-color: #E21B70; border-radius: 15px;" class="btn btn-primary btn-edit-profile" href="{{ url_for('edit_profile') }}">Edit Profile</a>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76P" crossorigin="anonymous"></script>
+</body>
+</html>
